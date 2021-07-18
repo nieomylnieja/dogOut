@@ -1,0 +1,32 @@
+#:kivy 2.0.0
+
+<DogOutScreen>:
+    name: "dog_out"
+
+    BoxLayout:
+        orientation:'vertical'
+
+        MDToolbar:
+            id: hello_textx
+
+        MDLabel:
+            text: "Dog Out!"
+            valign: "top"
+            halign: "center"
+
+        MDBottomNavigation:
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Home'
+                icon: 'home-outline'
+                on_tab_release:
+                    root.manager.transition.direction = "right"
+                    root.manager.current = "home"
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Log out'
+                icon: 'logout'
+                on_tab_release:
+                    app.show_logout_dialog()

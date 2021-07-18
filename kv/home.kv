@@ -1,0 +1,43 @@
+#:kivy 2.0.0
+
+<HomeScreen>:
+    name: "home"
+    hello_text: hello_text
+
+    BoxLayout:
+        orientation:'vertical'
+
+        MDToolbar:
+            id: hello_text
+
+        MDLabel:
+            text: "These are your dogs:"
+            valign: "bottom"
+            halign: "left"
+
+        MDList:
+            id: dogs_list
+
+            OneLineIconListItem:
+                text: "Add a dog"
+                on_release: print("plus")
+
+                IconLeftWidget:
+                    icon: "plus"
+
+        MDBottomNavigation:
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Dog Out!'
+                icon: 'dog-service'
+                on_tab_release:
+                    root.manager.transition.direction = "left"
+                    root.manager.current = "dog_out"
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Log out'
+                icon: 'logout'
+                on_tab_release:
+                    app.show_logout_dialog()

@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+kivy = "*"
+buildozer = "*"
+plyer = "*"
+kivymd = "*"
+email-validator = "*"
+pyrebase = "*"
+mapview = "*"
+requests = "*"
+
+[dev-packages]
+geocoder = "*"
+
+[requires]
+python_version = "3.9"

@@ -1,0 +1,3 @@
+# DogOut!
+
+A simple kivy app for taking your dogs out! Nothing serious, just a playground for exploring mobile applications and a studies project...

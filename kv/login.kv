@@ -1,0 +1,65 @@
+#:kivy 2.0.0
+
+<LoginScreen>:
+    name: "login"
+    email: email
+    password: password
+
+    MDBoxLayout:
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+        adaptive_height: True
+
+        MDIconButton:
+            icon: "dog-service"
+            user_font_size: "100sp"
+            pos_hint: {"center_x": 0.5}
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.accent_dark
+
+        MDTextField:
+            valign: "top"
+            id: email
+            mode: "rectangle"
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Email address is required"
+
+        MDTextField:
+            id: password
+            mode: "rectangle"
+            hint_text: "Password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            password: True
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Password is required"
+
+        MDRectangleFlatButton:
+            id: login
+            text: "Login"
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                root.login()
+
+        MDRectangleFlatButton:
+            id: register
+            text: "Register"
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "register"

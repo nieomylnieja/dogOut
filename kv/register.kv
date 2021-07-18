@@ -1,0 +1,119 @@
+#:kivy 2.0.0
+
+<RegisterScreen>:
+    name: "register"
+    username: username
+    email: email
+    phone: phone
+    password: password
+    password_repeat: password_repeat
+
+    MDBoxLayout:
+        size_hint: None, None
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        padding: 25
+        spacing: 25
+        adaptive_height: True
+        orientation: 'vertical'
+
+        MDTextField:
+            valign: "top"
+            id: username
+            mode: "rectangle"
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            required: True
+            max_text_length: 100
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Username is required"
+
+        MDTextField:
+            valign: "top"
+            id: email
+            mode: "rectangle"
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            required: True
+            max_text_length: 100
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Email is required"
+
+        MDTextField:
+            valign: "top"
+            id: phone
+            mode: "rectangle"
+            hint_text: "Phone Number"
+            icon_right: "phone"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            required: True
+            max_text_length: 9
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Phone number is required"
+
+        MDTextField:
+            id: password
+            mode: "rectangle"
+            hint_text: "Password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            password: True
+            required: True
+            max_text_length: 100
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Repeated is required"
+
+        MDTextField:
+            id: password_repeat
+            mode: "rectangle"
+            hint_text: "Repeat Password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 220
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            password: True
+            required: True
+            max_text_length: 100
+            required: True
+            helper_text_mode: "on_error"
+            helper_text: "Repeated password is required"
+
+        MDRectangleFlatButton:
+            id: register
+            text: "Register"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                root.register()
+                root.manager.transition.direction = "left"
+
+    AnchorLayout:
+        anchor_x: "left"
+        anchor_y: "bottom"
+
+        MDIconButton:
+            icon: "arrow-left"
+            user_font_size: "32sp"
+            on_release:
+                root.manager.current = "login"
+                root.manager.transition.direction = "right"
