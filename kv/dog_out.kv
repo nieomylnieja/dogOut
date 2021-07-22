@@ -1,4 +1,6 @@
 #:kivy 2.0.0
+#:import sys sys
+#:import MapSource kivy_garden.mapview.MapSource
 
 <DogOutScreen>:
     name: "dog_out"
@@ -7,12 +9,40 @@
         orientation:'vertical'
 
         MDToolbar:
-            id: hello_textx
+            title: "Let's go!"
+
+        MapView:
+            size_hint: [1, 1.5]
+            id: map
+            zoom: 13
+            map_source: MapSource(sys.argv[1], attribution="") if len(sys.argv) > 1 else "osm"
 
         MDLabel:
-            text: "Dog Out!"
-            valign: "top"
+            size_hint: [1, 0.7]
+            text: "Who's going out?"
+            font_style: "H6"
             halign: "center"
+
+        ScrollView:
+            size_hint_y: 3
+            do_scroll_x: False
+            do_scroll_x: True
+            bar_width: 10
+            effect_cls: "ScrollEffect"
+            scroll_type: ['content']
+
+            MDSelectionList:
+                id: selection_list
+                spacing: "12dp"
+
+        MDLabel:
+            size_hint: [0.2, 0.2]
+            text:""
+
+        MDRectangleFlatButton:
+            text: "DogOut!"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            on_release: root.dog_out()
 
         MDBottomNavigation:
 
@@ -29,4 +59,13 @@
                 text: 'Log out'
                 icon: 'logout'
                 on_tab_release:
-                    app.show_logout_dialog()
+                    root.show_logout_dialog()
+
+<DogOutListItem>
+    text: self.dog_name
+    secondary_text: self.last_out
+    _no_ripple_effect: True
+
+    ImageLeftWidget:
+        radius: [20, 20, 20, 20]
+        source: "res/logo.png"

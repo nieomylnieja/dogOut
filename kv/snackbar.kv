@@ -1,0 +1,22 @@
+<CustomSnackbar>
+    snackbar_x: "10dp"
+    snackbar_y: "10dp"
+
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: "information-outline"
+        theme_text_color: "Custom"
+        text_color: get_color_from_hex('ffffff')
+        opposite_colors: True
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: "15sp"
+        theme_text_color: 'Custom'
+        text_color: get_color_from_hex('ffffff')
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}

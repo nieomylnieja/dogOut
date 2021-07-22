@@ -1,9 +1,9 @@
 import json
 from dataclasses import dataclass
+from enum import Enum
 
 import pyrebase
 from pyrebase.pyrebase import Auth, Database
-from requests import HTTPError
 
 
 @dataclass
@@ -28,11 +28,23 @@ class Serializable:
         return cls(**json.loads(raw))
 
 
+class DogSex(str, Enum):
+    FEMALE: str = "female"
+    MALE: str = "male"
+
+
 @dataclass
 class DogModel(Serializable):
     uuid: str
     name: str
     race: str
+    age: int
+    sex: str
+    last_out: float = .0
+
+    @classmethod
+    def from_json(cls, raw: any):
+        return cls(**raw)
 
 
 @dataclass
@@ -50,7 +62,7 @@ class Datasource:
     db: Database
 
     user_auth: UserAuth
-    user_model: UserModel
+    user: UserModel
 
     def __init__(self):
         with open("config.local.json") as f:
@@ -63,18 +75,36 @@ class Datasource:
         try:
             user_auth = UserAuth(self.auth.create_user_with_email_and_password(email_address, password))
             self.auth.send_email_verification(user_auth.token)
-            user_model = UserModel(user_auth.uuid, username, email_address, phone_number)
-            self.db.child("users").push(user_model.to_json(), user_auth.token)
+            user_model = UserModel(user_auth.uuid, username, email_address, phone_number, [])
+            self.db.child("users").child(user_model.uuid).set(user_model.to_json(), user_auth.token)
             return True
-        except HTTPError:
+        except Exception as e:
+            print(e)
             return False
 
     def login_user(self, email_address: str, password: str) -> bool:
         try:
             user_auth = self.auth.sign_in_with_email_and_password(email_address, password)
             self.user_auth = UserAuth(user_auth)
+            users = self.db.child("users").get(self.user_auth.token).val()
+            for u in users.values():
+                um = UserModel.from_json(u)
+                if email_address == um.email_address:
+                    um.dogs = [DogModel.from_json(dog) for dog in um.dogs]
+                    self.user = um
+                    return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def update_user(self) -> bool:
+        try:
+            j = self.user.to_json()
+            self.db.child("users").child(self.user.uuid).set(j)
             return True
-        except HTTPError:
+        except Exception as e:
+            print(e)
             return False
 
     def refresh_session(self) -> bool:
@@ -82,10 +112,9 @@ class Datasource:
             user_auth = self.auth.refresh(self.user_auth.refresh_token)
             self.user_auth = UserAuth(user_auth)
             return True
-        except HTTPError:
+        except Exception as e:
+            print(e)
             return False
 
 
 DS = Datasource()
-User = UserModel("123", "Benson", "test@gmail.com", "509792751",
-                 [DogModel("1", "Bernie", "Husky"), DogModel("2", "Growler", "Shepherd")])

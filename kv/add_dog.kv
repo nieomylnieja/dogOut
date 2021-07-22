@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+
+<DogCreateContent>
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "250dp"
+    width: "150dp"
+
+    name: name.text
+    race: race.text
+    age: age.text
+    sex_female_check: female.active
+    sex_male_check: male.active
+
+    MDTextField:
+        id: name
+        hint_text: "Name"
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "Name is required"
+
+    MDTextField:
+        id: race
+        hint_text: "Race"
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "Race is required"
+
+    MDTextField:
+        id: age
+        hint_text: "Age"
+        input_filter: 'int'
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "Age is required"
+
+    MDBoxLayout:
+        orientation: "horizontal"
+
+        MDLabel:
+            text: "Sex:"
+
+        MDGridLayout:
+            cols: 2
+
+            MDLabel:
+                text: "male"
+                pos_hint: {'center_x': .4}
+
+            MDLabel:
+                text: "female"
+                pos_hint: {'center_x': .6}
+
+            Check:
+                id: male
+                active: True
+                pos_hint: {'center_x': .4}
+
+            Check:
+                id: female
+                pos_hint: {'center_x': .6}
+
+<Check@MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)
+
+<DogCreateContentError>
+    cols: 2
+
+    MDIcon:
+        icon: "alert-circle-outline"
+        theme_text_color: "Error"
+
+    MDLabel:
+        text: "All fields are required!"

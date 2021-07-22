@@ -2,28 +2,46 @@
 
 <HomeScreen>:
     name: "home"
-    hello_text: hello_text
 
     BoxLayout:
         orientation:'vertical'
 
         MDToolbar:
-            id: hello_text
+            title: root.hello_text
 
-        MDLabel:
-            text: "These are your dogs:"
-            valign: "bottom"
-            halign: "left"
+        GridLayout:
+            adaptive_size: True
+            rows: 3
 
-        MDList:
-            id: dogs_list
+            MDChip:
+                text: root.time
+                icon: "clock-outline"
+                color: [0,0,0,0]
+                padding_y: "20dp"
 
-            OneLineIconListItem:
-                text: "Add a dog"
-                on_release: print("plus")
+            MDLabel:
+                text: "Woof!"
+                font_style: "H4"
+                valign: "bottom"
+                halign: "center"
 
-                IconLeftWidget:
-                    icon: "plus"
+            MDLabel:
+                text: "Here you can add a new dog, delete an existing one (hope he's not dead!) or go straight to DogOut!"
+                font_style: "Caption"
+                valign: "bottom"
+                padding_x: "20dp"
+                halign: "left"
+
+        ScrollView:
+            size_hint_y: 2
+            do_scroll_x: False
+            do_scroll_x: True
+            bar_width: 10
+            effect_cls: "ScrollEffect"
+            scroll_type: ['content']
+
+            MDList:
+                id: dogs_list
 
         MDBottomNavigation:
 
@@ -40,4 +58,23 @@
                 text: 'Log out'
                 icon: 'logout'
                 on_tab_release:
-                    app.show_logout_dialog()
+                    root.show_logout_dialog()
+
+
+<DogExpansionPanelContent>
+    adaptive_height: True
+
+    TwoLineAvatarIconListItem:
+        id: dog_item
+        text: ""
+        secondary_text: ""
+
+        IconLeftWidget:
+            icon: 'information-outline'
+
+        IconRightWidget:
+            icon: 'delete'
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.error_color
+            on_release:
+                root.show_delete_dog_dialog()

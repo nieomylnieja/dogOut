@@ -1,6 +1,6 @@
-__version__ = "1.0.0-rc.1"
+__version__ = "1.0.0-rc.2"
 
-from app.app import DogOut
+from app.app import dog_out
 
 if __name__ == "__main__":
-    DogOut().run()
+    dog_out.run()
