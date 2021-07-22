@@ -53,7 +53,7 @@ class UserModel(Serializable):
     username: str
     email_address: str
     phone_number: str
-    dogs: list[DogModel]
+    dogs: list
 
 
 @dataclass

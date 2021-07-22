@@ -6,15 +6,14 @@ name = "pypi"
 [packages]
 kivy = "*"
 buildozer = "*"
-plyer = "*"
 kivymd = "*"
 email-validator = "*"
 pyrebase = "*"
 mapview = "*"
+geocoder = "*"
 requests = "*"
 
 [dev-packages]
-geocoder = "*"
 
 [requires]
 python_version = "3.9"

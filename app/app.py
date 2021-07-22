@@ -38,7 +38,7 @@ class LoginScreen(MDScreen):
     email = ObjectProperty(None)
     password = ObjectProperty(None)
 
-    errors: list[ErrorsListItem] = []
+    errors = []
 
     def login(self):
         email_address = self.validate_email()
@@ -92,7 +92,7 @@ class RegisterScreen(MDScreen):
     password = ObjectProperty(None)
     password_repeat = ObjectProperty(None)
 
-    errors: list[ErrorsListItem] = []
+    errors = []
 
     def add_error(self, text: str, icon: str):
         self.errors.append(ErrorsListItem(text=text, icon=icon))
@@ -369,12 +369,12 @@ class ConfirmationDialog(MDDialog):
 
 
 class SM(ScreenManager):
-    pre_auth_screens_dict: dict[str:MDScreen] = {
+    pre_auth_screens_dict = {
         "login": LoginScreen,
         "register": RegisterScreen,
     }
 
-    post_auth_screens_dict: dict[str:MDScreen] = {
+    post_auth_screens_dict = {
         "home": HomeScreen,
         "dog_out": DogOutScreen,
     }

@@ -13,7 +13,7 @@ package.domain = dogout.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,json
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -36,20 +36,20 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements = python3,kivy==2.0.0,kivymd,mapview,pyrebase,geocoder,email-validator,requests,urllib3,chardet,idna,ratelim,decorator,click,dnspython,pillow,oauth2client,httplib2,pyparsing,pyasn1,pyasn1_modules,virtualenv,six,sh,rsa,requests-toolbelt,python-jwt,pygments,pycryptodome,ptyprocess,protobuf,platformdirs,pexpect,kivy-garden.mapview,kivy-garden,jws,googleapis-common-protos,gcloud,future,filelock,docutils,distlib,backports.entry-points-selectable,jwcrypto,cryptography,Deprecated,wrapt
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
 # requirements.source.kivy = ../../kivy
 
 # (list) Garden requirements
-#garden_requirements =
+#garden_requirements = mapview
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)/res/logo.png
+# icon.filename = ./res/logo.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
